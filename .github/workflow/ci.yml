@@ -1,0 +1,25 @@
+name: Run to-do app
+
+on: [push]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - uses: actions/checkout@v3
+    
+    - name: Install Node.js
+     uses: actions/setup-node@v3
+     with:
+       node-version: 18
+
+    - name: Install dependencies
+     run: npm install
+
+     -name: Install playwright browsers
+     run: npx playwright install --with-deps
+
+     name: run playwright tests
+     run: npm test

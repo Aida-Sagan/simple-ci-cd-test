@@ -1,7 +1,6 @@
 import {test, expect} from '@playwright/test';
-import path from 'path';
 
-const pageUrl = 'file://' + path.resolve(__dirname, '../project/index.html');
+const pageUrl = 'https://simple-ci-cd-test-iehx.vercel.app/';
 
 console.log(pageUrl);
 
@@ -15,9 +14,9 @@ test("Проверяем добавление новой задачи в спи�
     await page.goto(pageUrl);
 
     await page.fill('#todoInput', 'Пойти в зал');
-    await page.click('addBtn');
+    await page.click('#addBtn');
 
     const tasks = page.locator('#todolist li');
-    expect(tasks).toHaveCount(1);
-    expect(tasks.first()).toHaveText('Пойти в зал');
+    await expect(tasks).toHaveCount(1);
+    await expect(tasks.first()).toHaveText('Пойти в зал');
 });
